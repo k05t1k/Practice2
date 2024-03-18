@@ -50,18 +50,28 @@ namespace lab1._1
             {
                 case 0:
                     NameTbx.Text = "Название пиццы";
+                    NameTbx_1.Text = "Размер";
                     PizzaDataGrid.ItemsSource = pizza.GetData();
                     break;
                 case 1:
-                    NameTbx.Text = "Тип оплаты";
+                    NameTbx.Text = "Фамилия";
+                    NameTbx_1.Text = "Имя";
+                    NameTbx_2.Text = "Отчество";
+                    NameTbx_2.Text = "Тип оплаты";
                     PizzaDataGrid.ItemsSource = clientTable.GetData();
                     break;
                 case 2:
-                    NameTbx.Text = "Должность";
+                    NameTbx.Text = "Фамилия";
+                    NameTbx_1.Text = "Имя";
+                    NameTbx_2.Text = "Отчество";
+                    NameTbx_2.Text = "Должность";
                     PizzaDataGrid.ItemsSource = personalTable.GetData();
                     break;
                 case 3:
-                    NameTbx.Text = "Цена заказа";
+                    NameTbx.Text = "Цена";
+                    NameTbx_1.Text = "ID Клиента";
+                    NameTbx_2.Text = "ID Персонала";
+                    NameTbx_2.Text = "ID Пиццы";
                     PizzaDataGrid.ItemsSource = ordersTable.GetData();
                     break;
             }
@@ -83,18 +93,30 @@ namespace lab1._1
             {
                 case 0:
                     NameTbx.Text = "Название пиццы";
+                    NameTbx_1.Text = "Размер";
+                    NameTbx_2.Text = " ";
+                    NameTbx_3.Text = " ";
                     PizzaDataGrid.ItemsSource = pizza.GetData();
                     break;
                 case 1:
-                    NameTbx.Text = "Тип оплаты";
+                    NameTbx.Text = "Фамилия";
+                    NameTbx_1.Text = "Имя";
+                    NameTbx_2.Text = "Отчество";
+                    NameTbx_3.Text = "Тип оплаты";
                     PizzaDataGrid.ItemsSource = clientTable.GetData();
                     break;
                 case 2:
-                    NameTbx.Text = "Должность";
+                    NameTbx.Text = "Фамилия";
+                    NameTbx_1.Text = "Имя";
+                    NameTbx_2.Text = "Отчество";
+                    NameTbx_3.Text = "Должность";
                     PizzaDataGrid.ItemsSource = personalTable.GetData();
                     break;
                 case 3:
-                    NameTbx.Text = "Цена заказа";
+                    NameTbx.Text = "Цена";
+                    NameTbx_1.Text = "ID Клиента";
+                    NameTbx_2.Text = "ID Персонала";
+                    NameTbx_3.Text = "ID Пиццы";
                     PizzaDataGrid.ItemsSource = ordersTable.GetData();
                     break;
             }
@@ -105,19 +127,19 @@ namespace lab1._1
             switch (list)
             {
                 case 0:
-                    pizza.InsertQuery(NameTbx.Text);
+                    pizza.InsertQuery(NameTbx.Text, int.Parse(NameTbx_1.Text));
                     PizzaDataGrid.ItemsSource = pizza.GetData();
                     break;
                 case 1:
-                    clientTable.InsertQuery(NameTbx.Text);
+                    clientTable.InsertQuery(NameTbx.Text, NameTbx_1.Text, NameTbx_2.Text, NameTbx_3.Text);
                     PizzaDataGrid.ItemsSource = clientTable.GetData();
                     break;
                 case 2:
-                    personalTable.InsertQuery(NameTbx.Text);
+                    personalTable.InsertQuery(NameTbx.Text, NameTbx_1.Text, NameTbx_2.Text, NameTbx_3.Text);
                     PizzaDataGrid.ItemsSource = personalTable.GetData();
                     break;
                 case 3:
-                    ordersTable.InsertQuery(decimal.Parse(NameTbx.Text));
+                    ordersTable.InsertQuery(decimal.Parse(NameTbx.Text), int.Parse(NameTbx_1.Text), int.Parse(NameTbx_2.Text), int.Parse(NameTbx_3.Text));
                     PizzaDataGrid.ItemsSource = ordersTable.GetData();
                     break;
             }
@@ -129,21 +151,21 @@ namespace lab1._1
             {
                 case 0:
                     object id = (PizzaDataGrid.SelectedItem as DataRowView).Row[0];
-                    pizza.UpdateQuery(NameTbx.Text, Convert.ToInt32(id));
+                    pizza.UpdateQuery(NameTbx.Text, int.Parse(NameTbx_1.Text), Convert.ToInt32(id));
                     PizzaDataGrid.ItemsSource = pizza.GetData();
                     break;
                 case 1:
                     object id_1 = (PizzaDataGrid.SelectedItem as DataRowView).Row[0];
-                    clientTable.UpdateQuery(NameTbx.Text, Convert.ToInt32(id_1));
+                    clientTable.UpdateQuery(NameTbx_3.Text, NameTbx_1.Text, NameTbx_2.Text, NameTbx.Text, Convert.ToInt32(id_1));
                     break;
                 case 2:
                     object id_2 = (PizzaDataGrid.SelectedItem as DataRowView).Row[0];
-                    personalTable.UpdateQuery(NameTbx.Text, Convert.ToInt32(id_2));
+                    personalTable.UpdateQuery(NameTbx_3.Text, NameTbx_1.Text, NameTbx_2.Text, NameTbx.Text, Convert.ToInt32(id_2));
                     PizzaDataGrid.ItemsSource = personalTable.GetData();
                     break;
                 case 3:
                     object id_3 = (PizzaDataGrid.SelectedItem as DataRowView).Row[0];
-                    ordersTable.UpdateQuery(decimal.Parse(NameTbx.Text), Convert.ToInt32(id_3));
+                    ordersTable.UpdateQuery(decimal.Parse(NameTbx.Text), int.Parse(NameTbx_1.Text), int.Parse(NameTbx_2.Text), int.Parse(NameTbx_3.Text), Convert.ToInt32(id_3));
                     PizzaDataGrid.ItemsSource = ordersTable.GetData();
                     break;
             }

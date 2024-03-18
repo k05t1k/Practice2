@@ -2359,15 +2359,22 @@ SELECT ID_Client, FirstName, SecondName, MiddleName, TypeOfPay FROM Client WHERE
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = "INSERT INTO [dbo].[Client] ([FirstName], [SecondName], [MiddleName], [TypeOfPay])" +
-                " VALUES (\' \', \' \', \' \', @TypeOfPay);\r\n";
+                " VALUES (@FirstName, @SecondName, @MiddleName, @TypeOfPay);\r\n";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SecondName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "SecondName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MiddleName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "MiddleName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TypeOfPay", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "TypeOfPay", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "UPDATE [dbo].[Client] SET [TypeOfPay] = @TypeOfPay WHERE ([ID_Client] = @Original" +
-                "_ID_Client);\r\n";
+            this._commandCollection[3].CommandText = "UPDATE [dbo].[Client] SET [TypeOfPay] = @TypeOfPay, [FirstName] = @FirstName, [Se" +
+                "condName] = @SecondName, [MiddleName] = @MiddleName WHERE ([ID_Client] = @Origin" +
+                "al_ID_Client);\r\n";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TypeOfPay", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "TypeOfPay", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SecondName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "SecondName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MiddleName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "MiddleName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID_Client", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID_Client", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
@@ -2626,13 +2633,31 @@ SELECT ID_Client, FirstName, SecondName, MiddleName, TypeOfPay FROM Client WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertQuery(string TypeOfPay) {
+        public virtual int InsertQuery(string FirstName, string SecondName, string MiddleName, string TypeOfPay) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((FirstName == null)) {
+                throw new global::System.ArgumentNullException("FirstName");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(FirstName));
+            }
+            if ((SecondName == null)) {
+                throw new global::System.ArgumentNullException("SecondName");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(SecondName));
+            }
+            if ((MiddleName == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(MiddleName));
+            }
             if ((TypeOfPay == null)) {
                 throw new global::System.ArgumentNullException("TypeOfPay");
             }
             else {
-                command.Parameters[0].Value = ((string)(TypeOfPay));
+                command.Parameters[3].Value = ((string)(TypeOfPay));
             }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -2655,7 +2680,7 @@ SELECT ID_Client, FirstName, SecondName, MiddleName, TypeOfPay FROM Client WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
-        public virtual int UpdateQuery(string TypeOfPay, int Original_ID_Client) {
+        public virtual int UpdateQuery(string TypeOfPay, string FirstName, string SecondName, string MiddleName, int Original_ID_Client) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
             if ((TypeOfPay == null)) {
                 throw new global::System.ArgumentNullException("TypeOfPay");
@@ -2663,7 +2688,25 @@ SELECT ID_Client, FirstName, SecondName, MiddleName, TypeOfPay FROM Client WHERE
             else {
                 command.Parameters[0].Value = ((string)(TypeOfPay));
             }
-            command.Parameters[1].Value = ((int)(Original_ID_Client));
+            if ((FirstName == null)) {
+                throw new global::System.ArgumentNullException("FirstName");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(FirstName));
+            }
+            if ((SecondName == null)) {
+                throw new global::System.ArgumentNullException("SecondName");
+            }
+            else {
+                command.Parameters[2].Value = ((string)(SecondName));
+            }
+            if ((MiddleName == null)) {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[3].Value = ((string)(MiddleName));
+            }
+            command.Parameters[4].Value = ((int)(Original_ID_Client));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2870,15 +2913,22 @@ SELECT ID_Orders, Price, Client_ID, Personal_ID, Pizza_ID FROM Orders WHERE (ID_
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = "INSERT INTO [dbo].[Orders] ([Price], [Client_ID], [Personal_ID], [Pizza_ID]) VALU" +
-                "ES (@Price, 0, 0, 0);\r\n";
+                "ES (@Price, @Client_ID, @Personal_ID, @Pizza_ID);\r\n";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 2, "Price", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Client_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Client_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Personal_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Personal_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Pizza_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Pizza_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "UPDATE [dbo].[Orders] SET [Price] = @Price WHERE ([ID_Orders] = @Original_ID_Orde" +
+            this._commandCollection[3].CommandText = "UPDATE [dbo].[Orders] SET [Price] = @Price, [Client_ID] = @Client_ID, [Personal_I" +
+                "D] = @Personal_ID, [Pizza_ID] = @Pizza_ID WHERE ([ID_Orders] = @Original_ID_Orde" +
                 "rs);\r\n";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 2, "Price", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Client_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Client_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Personal_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Personal_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Pizza_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Pizza_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID_Orders", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID_Orders", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
@@ -3053,9 +3103,12 @@ SELECT ID_Orders, Price, Client_ID, Personal_ID, Pizza_ID FROM Orders WHERE (ID_
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertQuery(decimal Price) {
+        public virtual int InsertQuery(decimal Price, int Client_ID, int Personal_ID, int Pizza_ID) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             command.Parameters[0].Value = ((decimal)(Price));
+            command.Parameters[1].Value = ((int)(Client_ID));
+            command.Parameters[2].Value = ((int)(Personal_ID));
+            command.Parameters[3].Value = ((int)(Pizza_ID));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3077,10 +3130,13 @@ SELECT ID_Orders, Price, Client_ID, Personal_ID, Pizza_ID FROM Orders WHERE (ID_
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
-        public virtual int UpdateQuery(decimal Price, int Original_ID_Orders) {
+        public virtual int UpdateQuery(decimal Price, int Client_ID, int Personal_ID, int Pizza_ID, int Original_ID_Orders) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
             command.Parameters[0].Value = ((decimal)(Price));
-            command.Parameters[1].Value = ((int)(Original_ID_Orders));
+            command.Parameters[1].Value = ((int)(Client_ID));
+            command.Parameters[2].Value = ((int)(Personal_ID));
+            command.Parameters[3].Value = ((int)(Pizza_ID));
+            command.Parameters[4].Value = ((int)(Original_ID_Orders));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3288,15 +3344,22 @@ SELECT ID_Personal, FirstName, SecondName, MiddleName, Post FROM Personal WHERE 
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = "INSERT INTO [dbo].[Personal] ([FirstName], [SecondName], [MiddleName], [Post]) VA" +
-                "LUES (\' \', \' \', \' \', @Post);\r\n";
+                "LUES (@FirstName, @SecondName, @MiddleName, @Post);\r\n";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SecondName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "SecondName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MiddleName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "MiddleName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Post", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Post", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "UPDATE [dbo].[Personal] SET [Post] = @Post WHERE ([ID_Personal] = @Original_ID_Pe" +
-                "rsonal);\r\n";
+            this._commandCollection[3].CommandText = "UPDATE [dbo].[Personal] SET [Post] = @Post, [FirstName] = @FirstName, [SecondName" +
+                "] = @SecondName, [MiddleName] = @MiddleName WHERE ([ID_Personal] = @Original_ID_" +
+                "Personal);\r\n";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Post", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Post", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SecondName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "SecondName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MiddleName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "MiddleName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID_Personal", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID_Personal", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
@@ -3555,13 +3618,31 @@ SELECT ID_Personal, FirstName, SecondName, MiddleName, Post FROM Personal WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertQuery(string Post) {
+        public virtual int InsertQuery(string FirstName, string SecondName, string MiddleName, string Post) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((FirstName == null)) {
+                throw new global::System.ArgumentNullException("FirstName");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(FirstName));
+            }
+            if ((SecondName == null)) {
+                throw new global::System.ArgumentNullException("SecondName");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(SecondName));
+            }
+            if ((MiddleName == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(MiddleName));
+            }
             if ((Post == null)) {
                 throw new global::System.ArgumentNullException("Post");
             }
             else {
-                command.Parameters[0].Value = ((string)(Post));
+                command.Parameters[3].Value = ((string)(Post));
             }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -3584,7 +3665,7 @@ SELECT ID_Personal, FirstName, SecondName, MiddleName, Post FROM Personal WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
-        public virtual int UpdateQuery(string Post, int Original_ID_Personal) {
+        public virtual int UpdateQuery(string Post, string FirstName, string SecondName, string MiddleName, int Original_ID_Personal) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
             if ((Post == null)) {
                 throw new global::System.ArgumentNullException("Post");
@@ -3592,7 +3673,25 @@ SELECT ID_Personal, FirstName, SecondName, MiddleName, Post FROM Personal WHERE 
             else {
                 command.Parameters[0].Value = ((string)(Post));
             }
-            command.Parameters[1].Value = ((int)(Original_ID_Personal));
+            if ((FirstName == null)) {
+                throw new global::System.ArgumentNullException("FirstName");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(FirstName));
+            }
+            if ((SecondName == null)) {
+                throw new global::System.ArgumentNullException("SecondName");
+            }
+            else {
+                command.Parameters[2].Value = ((string)(SecondName));
+            }
+            if ((MiddleName == null)) {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[3].Value = ((string)(MiddleName));
+            }
+            command.Parameters[4].Value = ((int)(Original_ID_Personal));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3788,15 +3887,17 @@ SELECT ID_Personal, FirstName, SecondName, MiddleName, Post FROM Personal WHERE 
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID_Pizza", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID_Pizza", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "INSERT INTO [dbo].[Pizza] ([PizzaName], [Size]) VALUES (@PizzaName, 30);\r\n";
+            this._commandCollection[2].CommandText = "INSERT INTO [dbo].[Pizza] ([PizzaName], [Size]) VALUES (@PizzaName, @Size);\r\n";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PizzaName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "PizzaName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Size", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Size", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "UPDATE [dbo].[Pizza] SET [PizzaName] = @PizzaName WHERE ([ID_Pizza] = @Original_I" +
-                "D_Pizza);\r\n";
+            this._commandCollection[3].CommandText = "UPDATE [dbo].[Pizza] SET [PizzaName] = @PizzaName, [Size] = @Size WHERE ([ID_Pizz" +
+                "a] = @Original_ID_Pizza);\r\n";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PizzaName", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "PizzaName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Size", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Size", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID_Pizza", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID_Pizza", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
@@ -3983,7 +4084,7 @@ SELECT ID_Personal, FirstName, SecondName, MiddleName, Post FROM Personal WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertQuery(string PizzaName) {
+        public virtual int InsertQuery(string PizzaName, int Size) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             if ((PizzaName == null)) {
                 throw new global::System.ArgumentNullException("PizzaName");
@@ -3991,6 +4092,7 @@ SELECT ID_Personal, FirstName, SecondName, MiddleName, Post FROM Personal WHERE 
             else {
                 command.Parameters[0].Value = ((string)(PizzaName));
             }
+            command.Parameters[1].Value = ((int)(Size));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4012,7 +4114,7 @@ SELECT ID_Personal, FirstName, SecondName, MiddleName, Post FROM Personal WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
-        public virtual int UpdateQuery(string PizzaName, int Original_ID_Pizza) {
+        public virtual int UpdateQuery(string PizzaName, int Size, int Original_ID_Pizza) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
             if ((PizzaName == null)) {
                 throw new global::System.ArgumentNullException("PizzaName");
@@ -4020,7 +4122,8 @@ SELECT ID_Personal, FirstName, SecondName, MiddleName, Post FROM Personal WHERE 
             else {
                 command.Parameters[0].Value = ((string)(PizzaName));
             }
-            command.Parameters[1].Value = ((int)(Original_ID_Pizza));
+            command.Parameters[1].Value = ((int)(Size));
+            command.Parameters[2].Value = ((int)(Original_ID_Pizza));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
