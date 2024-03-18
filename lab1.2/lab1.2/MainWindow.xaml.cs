@@ -24,11 +24,9 @@ namespace lab1._2
     {
         public int list = 0;
         private PizzeriaEntities context = new PizzeriaEntities();
-        TextBox[] text;
         public MainWindow()
         {
             InitializeComponent();
-            text = new TextBox[1] { NameTbx };
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -45,19 +43,29 @@ namespace lab1._2
             switch (list)
             {
                 case 0:
-                    text[0].Text = "Название пиццы";
+                    NameTbx.Text = "Название пиццы";
+                    NameTbx_1.Text = "Размер";
                     PizzaDataGrid.ItemsSource = context.Pizza.ToList();
                     break;
                 case 1:
-                    text[0].Text = "Тип оплаты";
+                    NameTbx.Text = "Фамилия";
+                    NameTbx_1.Text = "Имя";
+                    NameTbx_2.Text = "Отчество";
+                    NameTbx_3.Text = "Тип оплаты";
                     PizzaDataGrid.ItemsSource = context.Client.ToList();
                     break;
                 case 2:
-                    text[0].Text = "Должность";
+                    NameTbx.Text = "Фамилия";
+                    NameTbx_1.Text = "Имя";
+                    NameTbx_2.Text = "Отчество";
+                    NameTbx_3.Text = "Должность";
                     PizzaDataGrid.ItemsSource = context.Personal.ToList();
                     break;
                 case 3:
-                    text[0].Text = "Цена заказа";
+                    NameTbx.Text = "Цена";
+                    NameTbx_1.Text = "ID Клиента";
+                    NameTbx_2.Text = "ID Персонала";
+                    NameTbx_3.Text = "ID Пиццы";
                     PizzaDataGrid.ItemsSource = context.Orders.ToList();
                     break;
             }
@@ -78,19 +86,29 @@ namespace lab1._2
             switch (list)
             {
                 case 0:
-                    text[0].Text = "Название пиццы";
+                    NameTbx.Text = "Название пиццы";
+                    NameTbx_1.Text = "Размер";
                     PizzaDataGrid.ItemsSource = context.Pizza.ToList();
                     break;
                 case 1:
-                    text[0].Text = "Тип оплаты";
+                    NameTbx.Text = "Фамилия";
+                    NameTbx_1.Text = "Имя";
+                    NameTbx_2.Text = "Отчество";
+                    NameTbx_3.Text = "Тип оплаты";
                     PizzaDataGrid.ItemsSource = context.Client.ToList();
                     break;
                 case 2:
-                    text[0].Text = "Должность";
+                    NameTbx.Text = "Фамилия";
+                    NameTbx_1.Text = "Имя";
+                    NameTbx_2.Text = "Отчество";
+                    NameTbx_3.Text = "Должность";
                     PizzaDataGrid.ItemsSource = context.Personal.ToList();
                     break;
                 case 3:
-                    text[0].Text = "Цена заказа";
+                    NameTbx.Text = "Цена";
+                    NameTbx_1.Text = "ID Клиента";
+                    NameTbx_2.Text = "ID Персонала";
+                    NameTbx_3.Text = "ID Пиццы";
                     PizzaDataGrid.ItemsSource = context.Orders.ToList();
                     break;
             }
@@ -103,7 +121,8 @@ namespace lab1._2
             {
                 case 0:
                     Pizza pizza = new Pizza();
-                    pizza.PizzaName = text[0].Text;
+                    pizza.PizzaName = NameTbx.Text;
+                    pizza.Size = int.Parse(NameTbx_1.Text);
                     context.Pizza.Add(pizza);
 
                     context.SaveChanges();
@@ -111,7 +130,10 @@ namespace lab1._2
                     break;
                 case 1:
                     Client client = new Client();
-                    client.TypeOfPay = text[0].Text;
+                    client.TypeOfPay = NameTbx_3.Text;
+                    client.FirstName = NameTbx.Text;
+                    client.SecondName = NameTbx_1.Text;
+                    client.MiddleName = NameTbx_2.Text;
                     context.Client.Add(client);
 
                     context.SaveChanges();
@@ -119,7 +141,10 @@ namespace lab1._2
                     break;
                 case 2:
                     Personal personal = new Personal();
-                    personal.Post = text[0].Text;
+                    personal.Post = NameTbx_3.Text;
+                    personal.FirstName = NameTbx.Text;
+                    personal.SecondName = NameTbx_1.Text;
+                    personal.MiddleName = NameTbx_2.Text;
                     context.Personal.Add(personal);
 
                     context.SaveChanges();
@@ -127,7 +152,10 @@ namespace lab1._2
                     break;
                 case 3:
                     Orders order = new Orders();
-                    order.Price = decimal.Parse(text[0].Text);
+                    order.Price = decimal.Parse(NameTbx.Text);
+                    order.Client_ID = int.Parse(NameTbx_1.Text);
+                    order.Personal_ID = int.Parse(NameTbx_2.Text);
+                    order.Pizza_ID = int.Parse(NameTbx_3.Text);
                     context.Orders.Add(order);
 
                     context.SaveChanges();
@@ -146,7 +174,7 @@ namespace lab1._2
                     {
                         var selected = PizzaDataGrid.SelectedItem as Pizza;
                         selected.PizzaName = NameTbx.Text;
-
+                        selected.Size = int.Parse(NameTbx_1.Text);
                         context.SaveChanges();
                         PizzaDataGrid.ItemsSource = context.Pizza.ToList();
                     }
@@ -155,8 +183,10 @@ namespace lab1._2
                     if (PizzaDataGrid.SelectedItem != null)
                     {
                         var selected = PizzaDataGrid.SelectedItem as Client;
-                        selected.TypeOfPay = NameTbx.Text;
-
+                        selected.TypeOfPay = NameTbx_3.Text;
+                        selected.FirstName = NameTbx.Text;
+                        selected.SecondName = NameTbx_1.Text;
+                        selected.MiddleName = NameTbx_2.Text;
                         context.SaveChanges();
                         PizzaDataGrid.ItemsSource = context.Client.ToList();
                     }
@@ -165,8 +195,10 @@ namespace lab1._2
                     if (PizzaDataGrid.SelectedItem != null)
                     {
                         var selected = PizzaDataGrid.SelectedItem as Personal;
-                        selected.Post = NameTbx.Text;
-
+                        selected.Post = NameTbx_3.Text;
+                        selected.FirstName = NameTbx.Text;
+                        selected.SecondName = NameTbx_1.Text;
+                        selected.MiddleName = NameTbx_2.Text;
                         context.SaveChanges();
                         PizzaDataGrid.ItemsSource = context.Personal.ToList();
                     }
@@ -176,7 +208,9 @@ namespace lab1._2
                     {
                         var selected = PizzaDataGrid.SelectedItem as Orders;
                         selected.Price = decimal.Parse(NameTbx.Text);
-
+                        selected.Client_ID = int.Parse(NameTbx_1.Text);
+                        selected.Personal_ID = int.Parse(NameTbx_2.Text);
+                        selected.Pizza_ID = int.Parse(NameTbx_3.Text);
                         context.SaveChanges();
                         PizzaDataGrid.ItemsSource = context.Orders.ToList();
                     }

@@ -7,12 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="0,0,0,-6">
-        <DataGrid x:Name="PizzaDataGrid" Margin="0,0,0,131"/>
+        <DataGrid x:Name="PizzaDataGrid" Margin="0,0,0,147" RenderTransformOrigin="0.5,0.5">
+            <DataGrid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0.147"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0.397"/>
+                </TransformGroup>
+            </DataGrid.RenderTransform>
+        </DataGrid>
         <Button Content="(-" HorizontalAlignment="Left" Margin="250,376,0,0" VerticalAlignment="Top" Height="39" Width="47" Click="Button_Click"/>
         <Button Content="-)" HorizontalAlignment="Left" Margin="500,376,0,0" VerticalAlignment="Top" Height="39" Width="47" Click="Button1_Click"/>
-        <TextBox x:Name="NameTbx" HorizontalAlignment="Left" Margin="31,335,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="NameTbx_1" HorizontalAlignment="Left" Margin="31,335,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
         <Button Content="Добавить" HorizontalAlignment="Left" Margin="188,334,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
         <Button Content="Изменить" HorizontalAlignment="Left" Margin="274,334,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
         <Button Content="Удалить" HorizontalAlignment="Left" Margin="358,334,0,0" VerticalAlignment="Top" Click="Button_Click_3"/>
+        <TextBox x:Name="NameTbx_2" HorizontalAlignment="Left" Margin="31,358,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="NameTbx_3" HorizontalAlignment="Left" Margin="31,381,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="NameTbx" HorizontalAlignment="Left" Margin="31,312,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
